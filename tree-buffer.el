@@ -143,7 +143,7 @@
   (defalias 'tree-buffer-mouse-set-point 'mouse-set-point)
   (defun tree-buffer-event-to-key (event)
     (let ((type (event-basic-type event)))
-      (case type
+      (cl-case type
         ((mouse-1 mouse-2 mouse-3) 'mouse-release)
         ((down-mouse-1 down-mouse-2 down-mouse-3) 'mouse-press)
         (otherwise (event-basic-type event)))))
@@ -2282,7 +2282,7 @@ mentioned above!"
   (unless (not (equal (selected-frame) tree-buffer-frame))
     (let ((last-comm (tree-buffer-event-to-key last-command-event))
           (full-search-regexp nil))
-      (case last-comm
+      (cl-case last-comm
         ((delete backspace)
          ;; reduce by one from the end
          (setq tree-buffer-incr-searchpattern
@@ -2658,7 +2658,7 @@ functionality is done with the `help-echo'-property and the function
   (unless (not (equal (selected-frame) tree-buffer-frame))
     (let ((node (tree-buffer-get-node-at-point))
           (arrow-key (tree-buffer-event-to-key last-command-event)))
-      (case arrow-key
+      (cl-case arrow-key
         (up
          (forward-line -1)
          (beginning-of-line)
@@ -2844,7 +2844,7 @@ GUN Emacs and can be an additional key-qualifier symbol like 'mode-line or
                                 button)))
         (modifier-elem (if tree-buffer-running-xemacs
                            modifier
-                         (case modifier
+                         (cl-case modifier
                            (shift "S-")
                            (control "C-")
                            (meta "M-")

@@ -12814,7 +12814,7 @@ callback-function:
             'keyboard)
     (if (and (not (eq mouse-button 1)) (not (eq mouse-button 2)))
 	nil
-      (case ecb-primary-secondary-mouse-buttons
+      (cl-case ecb-primary-secondary-mouse-buttons
         (mouse-1--mouse-2
          (if control-pressed
              nil

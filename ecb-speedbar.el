@@ -322,7 +322,7 @@ future this could break."
                       (lambda (event count)
                         (if (/= (event-button event) 1)
                             nil		; Do normal operations.
-                          (case count
+                          (cl-case count
                             (1 (dframe-quick-mouse event))
                             ((2 3) (dframe-click event)))
                           ;; Don't do normal operations.

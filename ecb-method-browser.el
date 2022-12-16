@@ -2431,7 +2431,7 @@ applied default-tag-filters."
                                                 (if semantic-source-p "curr-type")
                                                 "function" "no-filter" "delete-last"))))
                        'no-filter-specified)))
-      (case choice
+      (cl-case choice
         (protection
          (ecb-methods-filter-by-prot inverse source-buffer))
         (tag-class
@@ -2566,13 +2566,13 @@ the current file."
     (let ((tag-filter-list (ecb-default-tag-filter-for-current-source)))
       (dolist (filter-spec tag-filter-list)
         (let ((filter-apply-fcn
-               (case (nth 0 filter-spec)
+               (cl-case (nth 0 filter-spec)
                  (protection 'ecb-methods-filter-by-prot)
                  (tag-class  'ecb-methods-filter-by-tag-class)
                  (regexp 'ecb-methods-filter-by-regexp)
                  (function 'ecb-methods-filter-by-function)))
               (filter
-               (case (nth 0 filter-spec)
+               (cl-case (nth 0 filter-spec)
                  (protection
                   (typecase (nth 1 filter-spec)
                     (symbol (symbol-name (nth 1 filter-spec)))

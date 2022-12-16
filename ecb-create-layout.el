@@ -652,7 +652,7 @@ never selects the edit-window."
     (setq ecb-create-layout-type (intern (ecb-query-string
                                           "Location of the the ECB-tree-windows:"
                                           '("left" "right" "top" "left-right")))))
-  (case ecb-create-layout-type
+  (cl-case ecb-create-layout-type
     (left
      (ecb-split-hor ecb-windows-width))
     (right

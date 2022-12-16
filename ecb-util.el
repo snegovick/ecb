@@ -266,7 +266,7 @@ Uses the `derived-mode-parent' property of the symbol to trace backwards."
 (unless ecb-running-xemacs
   (defun ecb-event-to-key (event)
     (let ((type (event-basic-type event)))
-      (case type
+      (cl-case type
         ((mouse-1 mouse-2 mouse-3) 'mouse-release)
         ((down-mouse-1 down-mouse-2 down-mouse-3) 'mouse-press)
         (otherwise (event-basic-type event)))))
@@ -692,7 +692,7 @@ If START or END is negative, it counts from the end."
 (defun ecb-concatenate (type &rest seqs)
   "Concatenate, into a sequence of type TYPE, the argument SEQUENCES.
 TYPE can be 'string, 'vector or 'list."
-  (case type
+  (cl-case type
     (vector (apply 'vconcat seqs))
     (string (apply 'concat seqs))
     (list (apply 'append (append seqs '(nil))))
@@ -1696,7 +1696,7 @@ Argument FRAMES are the frames used in the animation."
   "Return a string displaying a celeron as things happen.
 LENGTH is the amount of display that has been used.  NUMBER
 is t to display the done string, or the number to display."
-  (case number
+  (cl-case number
     ((t)
      (ecb-working-frame-animation-display length [ "[" "]" ]
 					  ecb-working-celeron-strings))
