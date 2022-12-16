@@ -198,7 +198,7 @@ semantic!. If not use the form \(when ecb-running-gnu-emacs-version-23)."
 
 (when ecb-running-xemacs
   (defun ecb-event-to-key (event)
-    (typecase event
+    (cl-typecase event
       (button-release-event 'mouse-release)
       (button-press-event 'mouse-press)
       (otherwise
@@ -673,7 +673,7 @@ If START or END is negative, it counts from the end."
     (let (len)
       (and end (< end 0) (setq end (+ end (setq len (length seq)))))
       (if (< start 0) (setq start (+ start (or len (setq len (length seq))))))
-      (typecase seq
+      (cl-typecase seq
         (list (if (> start 0) (setq seq (nthcdr start seq)))
               (if end
                   (let ((res nil))
@@ -704,7 +704,7 @@ arbitrary sequence. Example: \(ecb-rotate '\(a b c d e f) 'c) results in \(c d
 e f a b). If START-ELEM is not contained in SEQ then nil is returned."
   (let ((start-pos (ecb-position start-elem seq)))
     (when start-pos
-      (ecb-concatenate (typecase seq
+      (ecb-concatenate (cl-typecase seq
                          (list 'list)
                          (string 'string)
                          (vector 'vector))
@@ -1278,7 +1278,7 @@ be made either with the mouse or with the keyboard."
 (defun ecb-read-number (prompt &optional init-value)
   "Ask in the minibuffer for a number with prompt-string PROMPT. Optional
 INIT-VALUE can be either a number or a string-representation of a number."
-  (let ((init (typecase init-value
+  (let ((init (cl-typecase init-value
                 (number (number-to-string init-value))
                 (string
                  (if (ecb-string= init-value "0")
@@ -1479,12 +1479,12 @@ If always returns TEXT \(if not nil then modified with FACE)."
                                                                    'face
                                                                    text))
                                   (cf
-                                   (typecase current-face
+                                   (cl-typecase current-face
                                      (ecb-face (list current-face))
                                      (list current-face)
                                      (otherwise nil)))
                                   (nf
-                                   (typecase face
+                                   (cl-typecase face
                                      (ecb-face (list face))
                                      (list face)
                                      (otherwise nil))))
@@ -1499,12 +1499,12 @@ If always returns TEXT \(if not nil then modified with FACE)."
       (alter-text-property start end 'face
                            (lambda (current-face)
                              (let ((cf
-                                    (typecase current-face
+                                    (cl-typecase current-face
                                       (ecb-face (list current-face))
                                       (list current-face)
                                       (otherwise nil)))
                                    (nf
-                                    (typecase face
+                                    (cl-typecase face
                                       (ecb-face (list face))
                                       (list face)
                                       (otherwise nil))))
@@ -1667,7 +1667,7 @@ number (which happens to be ignored.).  While coders pass t into
 NUMBER, functions using this should convert NUMBER into a vector
 describing how to render the done message.
 Argument FRAMES are the frames used in the animation."
-  (typecase number
+  (cl-typecase number
     (vector
      (let ((zone (- (length (aref frames 0)) (length (aref number 0))
                     (length (aref number 1)))))
@@ -1843,7 +1843,7 @@ or a buffer-object."
 BUFFER-OR-WINDOW can be a buffer-name, a buffer or a window. If a
 window then the name of the buffer curently displayed in this
 window is returned."
-  (typecase buffer-or-window
+  (cl-typecase buffer-or-window
     (string buffer-or-window)
     (buffer (buffer-name buffer-or-window))
     (window (buffer-name (window-buffer buffer-or-window)))
@@ -1853,7 +1853,7 @@ window is returned."
   "Return the buffer-object of BUFFER-OR-WINDOW.
 BUFFER-OR-WINDOW can be a buffer-name, a buffer or a window.
 If a window then the buffer curently displayed in this window is returned."
-  (typecase buffer-or-window
+  (cl-typecase buffer-or-window
     (string (get-buffer buffer-or-window))
     (buffer buffer-or-window)
     (window (window-buffer buffer-or-window))
