@@ -351,13 +351,13 @@ This means in fact display the current analysis for current point."
       (ecb-analyse-add-nodes "Local Variables" "Local Variables" localvars
                              ecb-analyse-nodetype-localvars))))
 
-(defmethod ecb-analyse-more-nodes ((context semantic-analyze-context))
+(cl-defmethod ecb-analyse-more-nodes ((context semantic-analyze-context))
   "Show a set of ecb-nodes specific to CONTEXT."
   (let ((prefix (oref context prefix)))
     (when prefix
       (ecb-analyse-add-nodes "Prefix" "Prefix" prefix ecb-analyse-nodetype-prefix))))
 
-(defmethod ecb-analyse-more-nodes ((context semantic-analyze-context-assignment))
+(cl-defmethod ecb-analyse-more-nodes ((context semantic-analyze-context-assignment))
   "Show a set of ecb-nodes specific to CONTEXT."
   (call-next-method)
   (let ((assignee (oref context assignee)))
@@ -365,7 +365,7 @@ This means in fact display the current analysis for current point."
       (ecb-analyse-add-nodes "Assignee" "Assignee" assignee
                              ecb-analyse-nodetype-assignee))))
 
-(defmethod ecb-analyse-more-nodes ((context semantic-analyze-context-functionarg))
+(cl-defmethod ecb-analyse-more-nodes ((context semantic-analyze-context-functionarg))
   "Show a set of ecb-nodes specific to CONTEXT."
   (call-next-method)
   (let ((func (oref context function)))
